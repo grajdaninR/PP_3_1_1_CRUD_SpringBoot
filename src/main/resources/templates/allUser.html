@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>That's those weird users</title>
+</head>
+<body>
+<h1>Users City</h1>
+<h3>
+    <a th:href="@{/create}">Add new user</a>
+</h3>
+<table border="1">
+    <tr>
+        <th>No</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Last name</th>
+        <th>Email</th>
+    </tr>
+
+    <tr th:each="user, state : ${users}">
+        <td th:utext="${state.count} "></td>
+        <td th:utext="${user.id} "></td>
+        <td th:utext="${user.firstName}"></td>
+        <td th:utext="${user.lastName}"></td>
+        <td th:utext="${user.email}"></td>
+        <td>
+            <form th:action="@{/update/{id}(id=${user.id})}">
+                <input type="submit" value="Edit">
+            </form>
+        <td>
+            <form th:action="@{/delete/{id}(id=${user.id})}">
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
