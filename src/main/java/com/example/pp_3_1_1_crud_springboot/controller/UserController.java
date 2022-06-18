@@ -19,7 +19,6 @@ public class UserController {
 
     @Autowired
     public UserController(UserService userService) {
-        userService.addInitUsersToDB();
         this.userService = userService;
     }
 
@@ -46,8 +45,7 @@ public class UserController {
     }
     @GetMapping("/update/{id}")
     public String updateUserForm(@PathVariable("id") Long id, Model model) {
-        Optional<User> user = userService.findById(id);
-        model.addAttribute("user", user );
+        model.addAttribute("user", userService.findById(id) );
         return "/update";
     }
     @PatchMapping("/update")
